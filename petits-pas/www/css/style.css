@@ -1,0 +1,298 @@
+/* Palette douce et peu contrastée sur les fonds, pour limiter la surcharge sensorielle. */
+:root {
+  --bg: #f7f4ee;
+  --card: #ffffff;
+  --text: #2f3542;
+  --muted: #6f7787;
+  --accent: #5b8def;
+  --ok: #4caf7a;
+  --border: #e6e1d6;
+  --shadow: 0 2px 6px rgba(60, 50, 30, 0.08);
+  --radius: 22px;
+  --emoji: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: "Nunito", "Rounded Mplus 1c", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 18px;
+  background: var(--bg);
+  color: var(--text);
+  user-select: none;
+  -webkit-user-select: none;
+  overscroll-behavior: none;
+}
+
+button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; }
+input, select { font: inherit; }
+
+#app {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: max(12px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom));
+}
+
+.emoji { font-family: var(--emoji); line-height: 1; }
+
+/* ---------- En-tête ---------- */
+.top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 64px;
+  margin-bottom: 12px;
+}
+.top h1 { flex: 1; margin: 0; font-size: 1.5rem; }
+.round {
+  width: 60px; height: 60px;
+  flex: none;
+  display: grid; place-items: center;
+  font-size: 1.8rem;
+  background: var(--card);
+  border-radius: 50%;
+  box-shadow: var(--shadow);
+}
+.round:active { transform: scale(0.95); }
+
+/* ---------- Accueil ---------- */
+.hello { margin: 4px 0 16px; font-size: 1.7rem; font-weight: 800; }
+.hello .sub { display: block; font-size: 1rem; font-weight: 600; color: var(--muted); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 14px;
+}
+.tile {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px;
+  min-height: 150px;
+  padding: 14px 10px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+  background: var(--tile, var(--card));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.12s;
+}
+.tile .emoji { font-size: 3.6rem; }
+.tile:active { transform: scale(0.96); }
+.grid.small { grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 12px; }
+.grid.small .tile { min-height: 124px; font-size: 1rem; }
+.grid.small .tile .emoji { font-size: 3rem; }
+
+.parent-lock {
+  margin-top: auto;
+  align-self: center;
+  display: flex; align-items: center; gap: 8px;
+  padding: 18px 12px 6px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.parent-lock .ring {
+  --p: 0;
+  width: 36px; height: 36px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: conic-gradient(var(--accent) calc(var(--p) * 1%), var(--border) 0);
+}
+.parent-lock .ring span {
+  width: 28px; height: 28px; display: grid; place-items: center;
+  background: var(--bg); border-radius: 50%; font-size: 0.95rem;
+}
+
+/* ---------- Segments (onglets) ---------- */
+.tabs {
+  display: flex; gap: 8px;
+  margin-bottom: 14px;
+  padding: 5px;
+  background: var(--card);
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+}
+.tabs button {
+  flex: 1; padding: 12px 8px; border-radius: 999px; font-weight: 800; color: var(--muted);
+}
+.tabs button.on { background: var(--accent); color: #fff; }
+
+/* ---------- Grande carte ---------- */
+.stage {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 18px;
+  text-align: center;
+}
+.big-card {
+  width: min(100%, 420px);
+  padding: 28px 20px;
+  background: var(--tile, var(--card));
+  border-radius: 30px;
+  box-shadow: var(--shadow);
+}
+.big-card .emoji { font-size: clamp(5rem, 28vw, 9rem); }
+.big-card .caption { margin-top: 16px; font-size: 1.6rem; font-weight: 800; }
+.big-card .detail { margin-top: 10px; font-size: 1.15rem; color: var(--text); line-height: 1.4; }
+
+.row { display: flex; gap: 14px; justify-content: center; align-items: center; flex-wrap: wrap; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 64px;
+  padding: 0 26px;
+  font-weight: 800; font-size: 1.15rem;
+  background: var(--card);
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+}
+.btn.primary { background: var(--accent); color: #fff; }
+.btn.ok { background: var(--ok); color: #fff; }
+.btn:disabled { opacity: 0.35; }
+.btn:active:not(:disabled) { transform: scale(0.96); }
+.btn .emoji { font-size: 1.6rem; }
+
+/* ---------- Histoires ---------- */
+.dots { display: flex; gap: 8px; justify-content: center; }
+.dots i { width: 12px; height: 12px; border-radius: 50%; background: var(--border); }
+.dots i.on { background: var(--accent); }
+.story-text { font-size: 1.45rem; font-weight: 700; line-height: 1.35; max-width: 520px; }
+
+/* ---------- Jeu des émotions ---------- */
+.prompt { font-size: 1.5rem; font-weight: 800; }
+.choices { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+.choice {
+  width: 140px; height: 140px;
+  display: grid; place-items: center;
+  font-size: 4.5rem;
+  background: var(--card);
+  border: 5px solid transparent;
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s, opacity 0.3s, border-color 0.3s;
+}
+.choice.right { border-color: var(--ok); transform: scale(1.06); }
+.choice.dim { opacity: 0.3; }
+.choice.hint { border-color: var(--accent); }
+.feedback { min-height: 2.2em; font-size: 1.4rem; font-weight: 800; }
+.stars { font-size: 1.6rem; letter-spacing: 4px; min-height: 1.6em; }
+
+/* ---------- Emploi du temps ---------- */
+.now-next { display: flex; gap: 14px; justify-content: center; align-items: stretch; width: 100%; }
+.slot {
+  flex: 1; max-width: 300px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  padding: 18px 10px;
+  background: var(--card);
+  border-radius: 26px;
+  box-shadow: var(--shadow);
+}
+.slot .tag { font-size: 0.95rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+.slot .emoji { font-size: clamp(4rem, 20vw, 7rem); }
+.slot .name { font-size: 1.3rem; font-weight: 800; }
+.slot.now { background: #e3f3ea; outline: 4px solid var(--ok); }
+.slot.next { opacity: 0.8; }
+.slot.next .emoji { font-size: clamp(3rem, 14vw, 5rem); }
+
+.strip {
+  display: flex; gap: 8px; overflow-x: auto; padding: 6px 2px 10px; width: 100%;
+  scrollbar-width: none;
+}
+.strip div {
+  flex: none; width: 58px; height: 58px; display: grid; place-items: center;
+  font-size: 2rem; background: var(--card); border-radius: 16px; position: relative;
+}
+.strip div.done { opacity: 0.35; }
+.strip div.done::after {
+  content: "✓"; position: absolute; right: -4px; bottom: -4px;
+  width: 22px; height: 22px; display: grid; place-items: center;
+  font-size: 0.85rem; font-weight: 900; color: #fff; background: var(--ok); border-radius: 50%;
+}
+.strip div.cur { outline: 3px solid var(--ok); }
+
+/* ---------- Chacun son tour ---------- */
+.players { display: flex; gap: 14px; width: 100%; justify-content: center; }
+.player {
+  flex: 1; max-width: 260px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 16px 10px;
+  background: var(--card);
+  border: 5px solid transparent;
+  border-radius: 26px;
+  box-shadow: var(--shadow);
+  transition: opacity 0.3s, border-color 0.3s;
+}
+.player .emoji { font-size: 3.4rem; }
+.player .who { font-size: 1.3rem; font-weight: 800; }
+.player.active { border-color: var(--pc); }
+.player:not(.active) { opacity: 0.4; }
+.player .add { min-height: 56px; padding: 0 18px; border-radius: 999px; color: #fff; font-weight: 800; background: var(--pc); }
+.player .add:disabled { visibility: hidden; }
+
+.tower {
+  display: flex; flex-direction: column-reverse; align-items: center; gap: 4px;
+  min-height: 280px; justify-content: flex-start;
+}
+.block {
+  width: 120px; height: 24px; border-radius: 8px; background: var(--bc);
+}
+.block.new { animation: drop 0.35s ease-out; }
+@keyframes drop { from { transform: translateY(-30px); opacity: 0; } }
+
+/* ---------- Coin calme ---------- */
+.calm-stage { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; }
+.bubble {
+  width: 120px; height: 120px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffffff, #a9d4e6 60%, #8cc2dc);
+  box-shadow: 0 0 40px rgba(140, 194, 220, 0.6);
+  transition: transform 4s ease-in-out;
+}
+.bubble.in { transform: scale(2.2); }
+.breath-label { font-size: 1.8rem; font-weight: 800; color: #4a7f99; min-height: 1.3em; }
+
+/* ---------- Zone parents ---------- */
+.panel {
+  margin-bottom: 14px;
+  padding: 16px;
+  background: var(--card);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+.panel h2 { margin: 0 0 12px; font-size: 1.15rem; }
+.panel p, .panel li { color: var(--muted); line-height: 1.45; font-size: 0.98rem; }
+.panel ul { padding-left: 20px; margin: 0; }
+.field { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 0; }
+.field input[type="text"] {
+  flex: 1; max-width: 220px; padding: 10px 12px;
+  border: 1px solid var(--border); border-radius: 12px; background: var(--bg); color: var(--text);
+}
+.seg { display: flex; gap: 6px; }
+.seg button { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); font-weight: 700; }
+.seg button.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.sched-list { list-style: none; margin: 0 0 12px; padding: 0; }
+.sched-list li {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 0; border-bottom: 1px solid var(--border); color: var(--text);
+}
+.sched-list .emoji { font-size: 1.6rem; width: 36px; text-align: center; }
+.sched-list .lbl { flex: 1; }
+.sched-list button {
+  width: 40px; height: 40px; border-radius: 12px; background: var(--bg); font-size: 1.05rem;
+}
+.picker { display: flex; flex-wrap: wrap; gap: 8px; }
+.picker button {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 12px; border-radius: 999px; background: var(--bg); font-size: 0.95rem;
+}
+.picker .emoji { font-size: 1.3rem; }
+.link-btn { color: var(--accent); font-weight: 700; padding: 8px 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
+  .bubble { transition: transform 4s linear !important; }
+}

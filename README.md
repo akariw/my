@@ -1,3 +1,5 @@
+> Voir aussi [`petits-pas/`](petits-pas/) : **Petits Pas**, application Android pour aider les enfants autistes de 1 à 5 ans à se préparer à la vie sociale.
+
 # Mes Tâches
 
 Une application de liste de tâches simple, en HTML/CSS/JavaScript pur (aucune dépendance).

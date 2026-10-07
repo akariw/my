@@ -1,0 +1,20 @@
+{
+  "name": "petits-pas",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Application Android pour aider les enfants autistes de 1 à 5 ans à se préparer à la vie sociale.",
+  "scripts": {
+    "serve": "python3 -m http.server 8000 --directory www",
+    "sync": "cap sync android",
+    "open": "cap open android"
+  },
+  "dependencies": {
+    "@capacitor-community/text-to-speech": "^8.0.2",
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/core": "^8.5.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.5.3"
+  }
+}
