@@ -9,6 +9,17 @@
 </head>
 <body>
   <div id="app"></div>
+  <script>
+    // Si une erreur survient, on l'affiche au lieu de laisser un écran blanc.
+    window.addEventListener("error", function (e) {
+      var app = document.getElementById("app");
+      if (app && !app.children.length) {
+        app.innerHTML = '<p style="padding:24px;font-size:18px">Oups, un problème est survenu au démarrage.<br><small>' +
+          String(e.message).replace(/</g, "&lt;") + "</small></p>";
+      }
+    });
+  </script>
+  <script src="js/capacitor.js"></script>
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
 </body>

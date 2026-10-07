@@ -4,6 +4,7 @@
   "private": true,
   "description": "Application Android pour aider les enfants autistes de 1 à 5 ans à se préparer à la vie sociale.",
   "scripts": {
+    "postinstall": "cp node_modules/@capacitor/core/dist/capacitor.js www/js/capacitor.js",
     "serve": "python3 -m http.server 8000 --directory www",
     "sync": "cap sync android",
     "open": "cap open android"

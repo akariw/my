@@ -55,6 +55,14 @@ function shuffle(list) {
   return a;
 }
 
+// Plugin natif Capacitor (null dans un navigateur ordinaire).
+function nativePlugin(name) {
+  const cap = window.Capacitor;
+  if (!cap || typeof cap.isNativePlatform !== "function" || !cap.isNativePlatform()) return null;
+  if (typeof cap.registerPlugin !== "function") return null;
+  return cap.registerPlugin(name);
+}
+
 const activityById = (id) => ACTIVITIES.find((a) => a.id === id);
 const childName = () => state.settings.name.trim();
 
@@ -68,10 +76,7 @@ const Voice = {
   plugin: null,
 
   init() {
-    const cap = window.Capacitor;
-    if (cap && cap.isNativePlatform && cap.isNativePlatform()) {
-      this.plugin = cap.registerPlugin("TextToSpeech");
-    }
+    this.plugin = nativePlugin("TextToSpeech");
   },
 
   rate() {
@@ -787,20 +792,27 @@ SCREENS.parent = () => {
    Démarrage
    ========================================================= */
 
-Voice.init();
+// D'abord afficher l'accueil : un souci avec un plugin natif ne doit jamais bloquer l'écran.
+go("home");
+
+try {
+  Voice.init();
+} catch (err) {
+  console.error("Voix indisponible", err);
+}
 
 // Bouton « retour » d'Android : revient à l'écran précédent au lieu de fermer l'app.
-(function setupAndroidBack() {
-  const cap = window.Capacitor;
-  if (!cap || !cap.isNativePlatform || !cap.isNativePlatform()) return;
-  const App = cap.registerPlugin("App");
-  App.addListener("backButton", () => {
-    if (stack.length > 1) back();
-    else App.exitApp();
-  });
-})();
+try {
+  const App = nativePlugin("App");
+  if (App) {
+    App.addListener("backButton", () => {
+      if (stack.length > 1) back();
+      else App.exitApp();
+    });
+  }
+} catch (err) {
+  console.error("Bouton retour indisponible", err);
+}
 
 // Certains navigateurs chargent les voix en différé.
 if (window.speechSynthesis) speechSynthesis.onvoiceschanged = () => {};
-
-go("home");
