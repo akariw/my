@@ -1,0 +1,93 @@
+:root {
+  --bg: #f4f5f7;
+  --card: #ffffff;
+  --text: #1d2330;
+  --muted: #6b7280;
+  --accent: #4f46e5;
+  --border: #e5e7eb;
+  --danger: #dc2626;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111318;
+    --card: #1b1e26;
+    --text: #e8eaf0;
+    --muted: #9aa1ad;
+    --accent: #818cf8;
+    --border: #2c303b;
+    --danger: #f87171;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+.app {
+  max-width: 560px;
+  margin: 48px auto;
+  padding: 24px 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+h1 { margin: 0 0 20px; font-size: 1.6rem; }
+button { font: inherit; cursor: pointer; }
+.add { display: flex; gap: 8px; }
+.add input {
+  flex: 1;
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.add input:focus { outline: 2px solid var(--accent); border-color: transparent; }
+.add button {
+  padding: 10px 16px;
+  color: #fff;
+  background: var(--accent);
+  border: 0;
+  border-radius: 8px;
+}
+.filters { display: flex; gap: 6px; margin: 16px 0 8px; }
+.filters button {
+  padding: 6px 12px;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+.filters button.active { color: var(--accent); border-color: var(--accent); }
+.list { list-style: none; margin: 0; padding: 0; }
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 4px;
+  border-bottom: 1px solid var(--border);
+}
+.item input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--accent); }
+.item .text { flex: 1; word-break: break-word; }
+.item.done .text { color: var(--muted); text-decoration: line-through; }
+.item .delete {
+  color: var(--muted);
+  background: none;
+  border: 0;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+.item .delete:hover { color: var(--danger); }
+.empty { padding: 24px 0; text-align: center; color: var(--muted); }
+.footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.link { padding: 0; color: var(--muted); background: none; border: 0; }
+.link:hover { color: var(--danger); }
